@@ -1,0 +1,38 @@
+version: "3.0"      #docker-compose的版本号
+
+networks:     #网络配置
+  redis-sentinel-1:
+    driver: bridge
+
+services:           #所有服务的入口  固定写法
+  redis-sentinel-1:
+    image: redis:6.0.16
+    container_name: redis-sentinel-1
+    ports:
+      - 26379:23679
+    volumes:
+      - C:/Users/cesh1/Desktop/gitee/wq-alg/src/main/java/org/redis2/redis-sentinel1/data:/data
+      - C:/Users/cesh1/Desktop/gitee/wq-alg/src/main/java/org/redis2/redis-sentinel-1.conf:/etc/sentinel.conf
+    command: bash -c "redis-sentinel /etc/sentinel.conf && chmod 777 /etc/sentinel.conf"
+    depends_on:
+      - redis-master
+      - redis-slave-1
+      - redis-slave-2
+    networks:
+      - redis-sentinel-1
+
+  redis-sentinel-2:
+    image: redis:6.0.16
+    container_name: redis-sentinel-2
+    ports:
+      - 26380:23680
+    volumes:
+      - C:/Users/cesh1/Desktop/gitee/wq-alg/src/main/java/org/redis2/redis-sentinel2/data:/data
+      - C:/Users/cesh1/Desktop/gitee/wq-alg/src/main/java/org/redis2/redis-sentinel-2.conf:/etc/sentinel.conf
+    command: bash -c "redis-sentinel /etc/sentinel.conf && chmod 777 /etc/sentinel.conf"
+    depends_on:
+      - redis-master
+      - redis-slave-1
+      - redis-slave-2
+    networks:
+      - redis-sentinel-1
