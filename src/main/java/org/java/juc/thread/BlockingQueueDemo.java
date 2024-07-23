@@ -1,4 +1,4 @@
-package org.java.juc;
+package org.java.juc.thread;
 
 import org.junit.Test;
 

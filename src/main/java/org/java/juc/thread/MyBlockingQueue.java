@@ -1,4 +1,4 @@
-package org.java.juc;
+package org.java.juc.thread;
 
 /**
  * @description: MyBlockingQueue 个人实现的阻塞队列  主要是wait,notify
